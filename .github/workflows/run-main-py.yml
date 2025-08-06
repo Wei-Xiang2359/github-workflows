@@ -54,7 +54,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: v${{ github.run_number }}
-          name: Release ${{ github.ref_name }} , Run ${{ github.run_number }}
+          name: v${{ github.run_number }} ${{ github.ref_name }} release
           body: |
             run id: ${{ github.run_id }}
             run number: ${{ github.run_number }}
