@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "master" ]
     tags:
-      - "v*.*.*"
+      - '*'
     
   pull_request:
     branches: [ "master" ]
@@ -53,7 +53,7 @@ jobs:
       - name: create release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref_name }}
+          tag: v${{ github.run_id }}
           name: Release ${{ github.ref_name }} , Run ${{ github.run_number }}
           body: |
             run id: ${{ github.run_id }}
