@@ -7,9 +7,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
-    # Sequence of patterns matched against refs/tags
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    
   pull_request:
     branches: [ "master" ]
 
@@ -41,21 +39,17 @@ jobs:
       - name: ▶️ Run main.py
         run: python main.py
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: 🗂️ Create source archive
+        run: |
+          zip -r source-code.zip . -x ".git/*" ".github/workflows/*"
+
+      - name: 🚀 Create Git tag and release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - some
-            - changes
-            - done
-          draft: false
-          prerelease: false
+          tag_name: ${{ steps.get_version.outputs.tag }}
+          name: Release ${{ steps.get_version.outputs.tag }}
+          body: "Automated release of version ${{ steps.get_version.outputs.tag }}"
+          files: source-code.zip
       
       - name: Output Run Number
         run: echo v${{ github.run_number }}
