@@ -4,4 +4,4 @@ def add(a, b):
 	return a + b
 
 def test():
-	return assert add(3, 5) == 8
+	assert add(3, 5) == 8
