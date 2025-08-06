@@ -1,3 +1,5 @@
+import numpy
+
 print("bbq stingray the goat")
 
 def add(a, b):
