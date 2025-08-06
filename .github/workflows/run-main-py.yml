@@ -44,19 +44,20 @@ jobs:
       - name: ▶️ Run main.py
         run: python main.py
 
-        release:
-          runs-on: ubuntu-latest
-          permissions:
-            contents: write
-          steps:
-            - uses: actions/checkout@v4
-            - name: create release
-              uses: ncipollo/release-action@v1
-              with:
-                tag: v${{ github.run_number }}
-                name: v${{ github.run_number }} ${{ github.ref_name }} release
-                body: |
-                  run id: ${{ github.run_id }}
-                  run number: ${{ github.run_number }}
-                  run attempt: ${{ github.run_attempt }}
-                allowUpdates: true
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ github.run_number }}
+          name: v${{ github.run_number }} ${{ github.ref_name }} release
+          body: |
+            run id: ${{ github.run_id }}
+            run number: ${{ github.run_number }}
+            run attempt: ${{ github.run_attempt }}
+          allowUpdates: true
