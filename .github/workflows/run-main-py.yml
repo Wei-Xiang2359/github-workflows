@@ -53,7 +53,7 @@ jobs:
       - name: create release
         uses: ncipollo/release-action@v1
         with:
-          tag: v${{ github.run_id }}
+          tag: v${{ github.run_number }}
           name: Release ${{ github.ref_name }} , Run ${{ github.run_number }}
           body: |
             run id: ${{ github.run_id }}
