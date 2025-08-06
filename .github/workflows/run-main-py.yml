@@ -41,6 +41,8 @@ jobs:
       - name: ▶️ Run main.py
         run: python main.py
 
+      
+
       - name: 🗂️ Create source archive
         run: |
           zip -r source-code.zip . -x ".git/*" ".github/workflows/*"
