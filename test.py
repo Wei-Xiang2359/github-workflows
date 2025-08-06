@@ -1,7 +1,7 @@
-from main import add
+from subtract import subtract
 
 def test():
-        assert add(3, 5) == 8
+        assert subtract(5, 3) == 2
 
-if __name__ == "__main__":
+if __name__ == "__subtract__":
 	test()
